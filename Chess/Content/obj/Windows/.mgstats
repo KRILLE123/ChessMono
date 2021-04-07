@@ -1,0 +1,14 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"A:/Downloads/Chess-main/Chess/Content/1.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/1.xnb","TextureProcessor","Texture2DContent",1294,14485,0,3270824
+"A:/Downloads/Chess-main/Chess/Content/10.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/10.xnb","TextureProcessor","Texture2DContent",1260,14485,0,0124944
+"A:/Downloads/Chess-main/Chess/Content/11.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/11.xnb","TextureProcessor","Texture2DContent",2267,14485,0,0108589
+"A:/Downloads/Chess-main/Chess/Content/12.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/12.xnb","TextureProcessor","Texture2DContent",2485,14485,0,0154858
+"A:/Downloads/Chess-main/Chess/Content/2.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/2.xnb","TextureProcessor","Texture2DContent",933,14485,0,0098316
+"A:/Downloads/Chess-main/Chess/Content/3.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/3.xnb","TextureProcessor","Texture2DContent",1878,14485,0,0117986
+"A:/Downloads/Chess-main/Chess/Content/4.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/4.xnb","TextureProcessor","Texture2DContent",1944,14485,0,0097019
+"A:/Downloads/Chess-main/Chess/Content/5.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/5.xnb","TextureProcessor","Texture2DContent",2637,14485,0,009607
+"A:/Downloads/Chess-main/Chess/Content/6.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/6.xnb","TextureProcessor","Texture2DContent",2279,14485,0,0091317
+"A:/Downloads/Chess-main/Chess/Content/7.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/7.xnb","TextureProcessor","Texture2DContent",797,14485,0,0097693
+"A:/Downloads/Chess-main/Chess/Content/8.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/8.xnb","TextureProcessor","Texture2DContent",725,14485,0,0098525
+"A:/Downloads/Chess-main/Chess/Content/9.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/9.xnb","TextureProcessor","Texture2DContent",1516,14485,0,0099251
+"A:/Downloads/Chess-main/Chess/Content/line.png","A:/Downloads/Chess-main/Chess/Content/bin/Windows/line.xnb","TextureProcessor","Texture2DContent",119,89,0,0062771

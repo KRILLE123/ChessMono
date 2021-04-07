@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/1.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/10.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/11.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/12.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/2.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/3.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/4.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/5.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/6.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/7.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/8.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/9.png</File>
+    <File>A:/Downloads/Chess-main-main/Chess/Content/line.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
