@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>A:/Downloads/Chess-main-main/Chess/Content/3.png</SourceFile>
-  <SourceTime>2021-03-25T13:41:14+01:00</SourceTime>
-  <DestFile>A:/Downloads/Chess-main-main/Chess/Content/bin/Windows/Content/3.xnb</DestFile>
-  <DestTime>2021-04-05T13:28:22.1063693+02:00</DestTime>
+  <SourceFile>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/3.png</SourceFile>
+  <SourceTime>2021-04-08T12:40:02.1475304+02:00</SourceTime>
+  <DestFile>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/bin/Windows/Content/3.xnb</DestFile>
+  <DestTime>2021-04-08T12:49:00.6408354+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
