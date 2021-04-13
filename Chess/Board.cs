@@ -15,7 +15,7 @@ namespace Chess
             {7, 7, 7, 7, 7, 7, 7, 7 },
             {0, 0, 0, 0, 10, 0, 0, 0 },
             {0, 0, 0, 0, 0, 0, 0, 0 },
-            {0, 0, 0, 0, 10, 4, 0, 0 },
+            {0, 0, 2, 0, 10, 4, 0, 0 },
             {0, 0, 0, 0, 0, 1, 0, 0 },
             {1, 1, 1, 1, 1, 10, 1, 1 },
             {2, 3, 4, 5, 6, 4, 3, 2 },
@@ -62,12 +62,12 @@ namespace Chess
 
             if (gridProperty.GridIdentifier == 7 || (choosenPieceProperties?.GridIdentifier == 7 && hasChoosenPiece))
             {
-                PawnMove(gridProperty, 1);  
+                PawnMove(gridProperty, 1);
             }
-            else if(gridProperty.GridIdentifier == 1 || choosenPieceProperties?.GridIdentifier == 1 && hasChoosenPiece)
+            else if (gridProperty.GridIdentifier == 1 || choosenPieceProperties?.GridIdentifier == 1 && hasChoosenPiece)
             {
                 PawnMove(gridProperty, -1);
-            } else if(gridProperty.GridIdentifier == 4 || choosenPieceProperties?.GridIdentifier == 4 && hasChoosenPiece)
+            } else if (gridProperty.GridIdentifier == 4 || choosenPieceProperties?.GridIdentifier == 4 && hasChoosenPiece)
             {
                 GetDiagonalMoves(gridProperty);
             }
@@ -75,7 +75,11 @@ namespace Chess
             {
                 GetDiagonalMoves(gridProperty);
             }
-
+            else if (gridProperty.GridIdentifier == 2 || choosenPieceProperties?.GridIdentifier == 2 && hasChoosenPiece)
+            {
+                GetHorizontalMoves(gridProperty);
+                GetVerticalMoves(gridProperty);
+            }
         }
 
         private int GetPieceOnGridCoord(IntVector2 gridCoord)
@@ -119,11 +123,14 @@ namespace Chess
                         }
                     }
                     if (hasChoosenPiece) 
-                    { 
-                        if(xMove == choosenPieceProperties.GridCoords.X && yMove == choosenPieceProperties.GridCoords.Y)
+                    {
+                        Debug.WriteLine("lol");
+                        if(xMove == gridProperties.GridCoords.X && yMove == gridProperties.GridCoords.Y)
                         {
+                            Debug.WriteLine("lol2");
+
                             grid[gridProperties.GridCoords.X, gridProperties.GridCoords.Y] = choosenPieceProperties.GridIdentifier;
-                            grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = gridProperties.GridIdentifier;
+                            grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = 0;
                             ResetBoard();
                             break;
                         }
@@ -225,8 +232,47 @@ namespace Chess
             //}
         //}
 
+        private void GetHorizontalMoves(GridProperties gridProperties, int[] upOrDown = null, int maxMoves = -1)
+        {
+            int[] _upOrDown = upOrDown == null ? new int[2] { 1, 1 } : upOrDown;
+            int x = hasChoosenPiece ? choosenPieceProperties.GridCoords.X : gridProperties.GridCoords.X;
+            int y = hasChoosenPiece ? choosenPieceProperties.GridCoords.Y : gridProperties.GridCoords.Y;
+            int color = GetColorById(hasChoosenPiece ? choosenPieceProperties.GridIdentifier : gridProperties.GridIdentifier);
 
-        private void GetVerticalMoves(GridProperties gridProperties, int maxMoves = -1)
+            for (int j = 0; j < 2; j++)
+            {
+                int i = j == 1 ? _upOrDown[0] : -_upOrDown[1] ;
+                
+                while (y + i < 8 && y + i >= 0)
+                {
+                    if (hasChoosenPiece)
+                    {
+
+                    }
+                    else
+                    {
+                        if (grid[x, y + i] == 0)
+                        {
+                            grid[x, y + i] = -100;
+                        }
+                        else if (color != GetColorById(grid[x, y + i]))
+                        {
+                            grid[x, y + i] *= -1;
+                            break;
+
+                        }
+                        else if (color == GetColorById(grid[x, y + i]))
+                        {
+                            break;
+                        }
+                    }
+                    if(j == 1) { i++; } else { i--; }
+                }
+            }
+        }
+
+
+        private void GetVerticalMoves(GridProperties gridProperties, int[] upOrDown = null, int maxMoves = -1)
         {
             //if (hasChoosenPiece)
             //{
@@ -235,47 +281,63 @@ namespace Chess
             //    choosenPieceProperties = g;
             //}
 
+            int[] _upOrDown = upOrDown == null ? new int[2] { 1, 1 } : upOrDown;
             int x = hasChoosenPiece ? choosenPieceProperties.GridCoords.X : gridProperties.GridCoords.X;
             int y = hasChoosenPiece ? choosenPieceProperties.GridCoords.Y : gridProperties.GridCoords.Y;
             int color = GetColorById(hasChoosenPiece ? choosenPieceProperties.GridIdentifier : gridProperties.GridIdentifier);
-            int multiplier = 1;
-            int i = 1;
+            //int multiplier = 1;
+            //if (color == 1) { _upOrDown = new int[2] { 1, 0}; } else if (color == 2) { _upOrDown = new int[2] { 0, -1 }; }
 
-            if(color == 1 ) { multiplier = -1; } else if(color == 2) { multiplier = 1; }
-
-
-            while(x + (i*multiplier) < 8 && x + (i * multiplier) > 0 && (hasChoosenPiece ? choosenPieceProperties.GridCoords.Y == gridProperties.GridCoords.Y : true) && (maxMoves != -1 ? i <= maxMoves : true))
+            for (int j = 0; j < _upOrDown.Length; j++)
             {
-                if (hasChoosenPiece)
+                if (_upOrDown[j] != 0)
                 {
-                    Debug.WriteLine(x + (i * multiplier));
-                    if (gridProperties.GridCoords.X == x + (i * multiplier))
-                    {
-                        Debug.WriteLine("lel");
-                        grid[gridProperties.GridCoords.X, gridProperties.GridCoords.Y] = choosenPieceProperties.GridIdentifier;
-                        grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = 0;
-                        ResetBoard();
-                        break;
-                    }
-                }
-                else
-                {
-                    if (grid[x + (i * multiplier), y] == 0)
-                    {
-                        grid[x + (i * multiplier), y] = -100;
-                    }
-                    else if ((color == 2 && GetColorById(grid[x + (i * multiplier), y]) != 2) || (color == 1 && GetColorById(grid[x + (i * multiplier), y]) != 1) && ((gridProperties.GridIdentifier == 1 || gridProperties.GridIdentifier == 7) && color == 1 && GetColorById(grid[x + (i * multiplier), y]) != 2 && color == 2 && GetColorById(grid[x + (i * multiplier), y]) != 1))
-                    {
-                        grid[x + (i * multiplier), y] *= -1;
-                    }
-                }
-                i++;
+                    int i = j == 0 ? _upOrDown[0] : -_upOrDown[1];
+                    int counter = 1;
 
+
+                    while (x + i < 8 && x + i >= 0 && (hasChoosenPiece ? choosenPieceProperties.GridCoords.Y == gridProperties.GridCoords.Y : true) && (maxMoves != -1 ? counter <= maxMoves : true))
+                    {
+                        Debug.WriteLine(x + i);
+                        if (hasChoosenPiece)
+                        {
+                            if (gridProperties.GridCoords.X == x + i)
+                            {
+                                //Debug.WriteLine("lel");
+                                grid[gridProperties.GridCoords.X, gridProperties.GridCoords.Y] = choosenPieceProperties.GridIdentifier;
+                                grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = 0;
+                                ResetBoard();
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (grid[x + i, y] == 0)
+                            {
+                                grid[x + i, y] = -100;
+                            }
+                            else if (color != GetColorById(grid[x + i, y]))
+                            {
+                                grid[x + i, y] *= -1;
+                                break;
+                            }
+                            else if (color == GetColorById(grid[x + i, y]))
+                            {
+                                break;
+                            }
+                        }
+                        if (j == 0) { i++; } else { i--; }
+                        counter++;
+
+                    }
+                }
             }
             if (hasChoosenPiece)
             {
                 hasChoosenPiece = false;
-            } else {
+            }
+            else
+            {
                 hasChoosenPiece = true;
                 choosenPieceProperties = gridProperties;
 
@@ -284,12 +346,16 @@ namespace Chess
 
         private void PawnMove(GridProperties gridProperty, int whiteorblackMultiplier)
         {
+            int color = GetColorById(gridProperty.GridIdentifier);
+            int[] verticalGrid = null;
+            if(color == 2) { verticalGrid = new int[2] { 1, 0 }; } else if(color == 1) { verticalGrid = new int[2] { 0, 1 }; }
+ 
             if ((GetColorById(gridProperty.GridIdentifier) == 1 && gridProperty.GridCoords.X == 6) || (GetColorById(gridProperty.GridIdentifier) == 7 && gridProperty.GridCoords.X == 2)) {
-                GetVerticalMoves(gridProperty, 2);
+                GetVerticalMoves(gridProperty, verticalGrid, 2);
                 GetDiagonalMoves(gridProperty, new int[2, 2] { { -1, -1 }, { -1, 1 } }, 1, true);
             } else
             {
-                GetVerticalMoves(gridProperty, 1);
+                GetVerticalMoves(gridProperty, verticalGrid, 1);
                 GetDiagonalMoves(gridProperty, new int[2, 2] { { -1, -1 }, { -1, 1 } }, 1, true);
             }
 
