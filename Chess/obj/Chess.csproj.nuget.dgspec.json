@@ -1,28 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\INF2\\Documents\\GitHub\\Chess2\\Chess\\Chess.csproj": {}
+    "A:\\Downloads\\Chess-main\\Chess\\Chess\\Chess\\Chess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\INF2\\Documents\\GitHub\\Chess2\\Chess\\Chess.csproj": {
+    "A:\\Downloads\\Chess-main\\Chess\\Chess\\Chess\\Chess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\INF2\\Documents\\GitHub\\Chess2\\Chess\\Chess.csproj",
+        "projectUniqueName": "A:\\Downloads\\Chess-main\\Chess\\Chess\\Chess\\Chess.csproj",
         "projectName": "Chess",
-        "projectPath": "C:\\Users\\INF2\\Documents\\GitHub\\Chess2\\Chess\\Chess.csproj",
-        "packagesPath": "C:\\Users\\INF2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\INF2\\Documents\\GitHub\\Chess2\\Chess\\obj\\",
+        "projectPath": "A:\\Downloads\\Chess-main\\Chess\\Chess\\Chess\\Chess.csproj",
+        "packagesPath": "C:\\Users\\Krill\\.nuget\\packages\\",
+        "outputPath": "A:\\Downloads\\Chess-main\\Chess\\Chess\\Chess\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\INF2\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Krill\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://teamcity.monogame.net/guestAuth/app/nuget/feed/_Root/default/v3/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,7 +70,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

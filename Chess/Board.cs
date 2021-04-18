@@ -13,11 +13,11 @@ namespace Chess
         public int[,] grid = new int[8, 8] { 
             {8, 9, 10, 11, 12, 10, 9, 8 },
             {7, 7, 7, 7, 7, 7, 7, 7 },
-            {0, 0, 0, 0, 10, 0, 0, 0 },
             {0, 0, 0, 0, 0, 0, 0, 0 },
-            {0, 0, 2, 0, 10, 4, 0, 0 },
-            {0, 0, 0, 0, 0, 1, 0, 0 },
-            {1, 1, 1, 1, 1, 10, 1, 1 },
+            {0, 0, 0, 0, 0, 0, 0, 0 },
+            {0, 0, 0, 0, 0, 0, 0, 0 },
+            {0, 0, 0, 0, 0, 0, 0, 0 },
+            {1, 1, 1, 1, 1, 1, 1, 1 },
             {2, 3, 4, 5, 6, 4, 3, 2 },
         };
 
@@ -28,7 +28,6 @@ namespace Chess
 
         private int GetColorById(int pieceId) // 1 = white, 2 = black, 0 = empty
         {
-            //Debug.WriteLine(pieceId);
             if (pieceId >= 1 && pieceId <= 6)
             {
                 return 1;
@@ -55,13 +54,25 @@ namespace Chess
                 }
             }
         }
+        private void SwitchChoosenPiece(GridProperties gridProperties)
+        {
+            if (hasChoosenPiece)
+            {
+                hasChoosenPiece = false;
+                choosenPieceProperties = null;
+
+            }
+            else
+            {
+                hasChoosenPiece = true;
+                choosenPieceProperties = gridProperties;
+
+            }
+        }
 
         public void ChoosePiece(GridProperties gridProperty)
         {
             ResetBoard();
-
-            //Debug.WriteLine(gridProperty.GridIdentifier);
-            //Debug.WriteLine(gridProperty.GridCoords.X);
 
             if (gridProperty.GridIdentifier == 7 || choosenPieceProperties?.GridIdentifier == 7 && hasChoosenPiece)
             {
@@ -70,21 +81,59 @@ namespace Chess
             else if (gridProperty.GridIdentifier == 1 || choosenPieceProperties?.GridIdentifier == 1 && hasChoosenPiece)
             {
                 PawnMove(gridProperty, -1);
-            } else if (gridProperty.GridIdentifier == 4 || choosenPieceProperties?.GridIdentifier == 4 && hasChoosenPiece)
+            } else if (gridProperty.GridIdentifier == 4 || choosenPieceProperties?.GridIdentifier == 4 && hasChoosenPiece || (gridProperty.GridIdentifier == 10 || choosenPieceProperties?.GridIdentifier == 10 && hasChoosenPiece))
             {
                 GetDiagonalMoves(gridProperty);
             }
-            else if (gridProperty.GridIdentifier == 10 || choosenPieceProperties?.GridIdentifier == 10 && hasChoosenPiece)
-            {
-                GetDiagonalMoves(gridProperty);
-            }
-            else if (gridProperty.GridIdentifier == 2 || choosenPieceProperties?.GridIdentifier == 2 && hasChoosenPiece)
+            else if (gridProperty.GridIdentifier == 2 || choosenPieceProperties?.GridIdentifier == 2 && hasChoosenPiece || (gridProperty.GridIdentifier == 8 || choosenPieceProperties?.GridIdentifier == 8 && hasChoosenPiece))
             {
                 GetHorizontalMoves(gridProperty);
                 GetVerticalMoves(gridProperty);
+            } else if(gridProperty.GridIdentifier == 5|| choosenPieceProperties?.GridIdentifier == 5 && hasChoosenPiece || (gridProperty.GridIdentifier == 11 || choosenPieceProperties?.GridIdentifier == 11 && hasChoosenPiece))
+            {
+                GetHorizontalMoves(gridProperty);
+                GetVerticalMoves(gridProperty);
+                GetDiagonalMoves(gridProperty);
+            } else if(gridProperty.GridIdentifier == 3 || choosenPieceProperties?.GridIdentifier == 3 && hasChoosenPiece || (gridProperty.GridIdentifier == 9 || choosenPieceProperties?.GridIdentifier == 9 && hasChoosenPiece))
+            {
+                KnightMove(gridProperty);
             }
-
             SwitchChoosenPiece(gridProperty);
+        }
+
+        private bool SetPiecePath(GridProperties gridProperties, int x, int y)
+        {
+            if (hasChoosenPiece)
+            {
+                if (x == gridProperties.GridCoords.X && y == gridProperties.GridCoords.Y)
+                {
+                    grid[gridProperties.GridCoords.X, gridProperties.GridCoords.Y] = choosenPieceProperties.GridIdentifier;
+                    grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = 0;
+                    ResetBoard();
+                    return true;
+                }
+            }
+            else
+            {
+                if (grid[x, y] == 0)
+                {
+                    grid[x, y] = -100;
+                }
+                else if (grid[x, y] > 0)
+                {
+                    if (GetColorById(gridProperties.GridIdentifier) != GetColorById(grid[x, y]))
+                    {
+                        grid[x, y] *= -1;
+                        return true;
+                    }
+                    else if (GetColorById(gridProperties.GridIdentifier) == GetColorById(grid[x, y]))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+
         }
 
         private int GetPieceOnGridCoord(IntVector2 gridCoord)
@@ -92,17 +141,30 @@ namespace Chess
             return grid[gridCoord.X, gridCoord.Y];
         }
 
-        //private void SetDiagonaValue(int first, int second, int currentX, int currentY, int i)
-        //{
-        //    if (grid[currentX + (i * first), currentY + (i * second)] == 0)
-        //    {
-        //        grid[currentX + (i * first), currentY + (i * second)] = -1;
-        //    }
-        //    else
-        //    {
-        //        grid[currentX + (i * first), currentY + (i * second)] *= -1;
-        //    }
-        //}
+
+        //MOVES
+
+        private void KnightMove(GridProperties gridProperties)
+        {
+            int currentX = hasChoosenPiece ? choosenPieceProperties.GridCoords.X : gridProperties.GridCoords.X;
+            int currentY = hasChoosenPiece ? choosenPieceProperties.GridCoords.Y : gridProperties.GridCoords.Y;
+            int x;
+            int y;
+
+            for (int i = 1; i <= 8; i++)
+            {
+                int xDirectionModifier = i > 0 && i <= 4 ? (i % 2 == 0 ? -1 : 1) : (i >= 4 && i <= 6 ? 1 : -1);  
+                int yDirectionModifier = i > 0 && i <= 4 ? (i > 0 && i <= 2 ? 1 : -1) : (i % 2 == 0 ? -1 : 1);
+
+                x = i > 0 && i <= 4 ? currentX + (2 * xDirectionModifier) : currentX + (1 * xDirectionModifier);
+                y = i > 0 && i <= 4 ? currentY + (1 * yDirectionModifier) : currentY + (2 * yDirectionModifier);
+
+                if (x < 8 && x >= 0 && y < 8 && y >= 0) 
+                {
+                    SetPiecePath(gridProperties, x, y);
+                }
+            }
+        }
 
         private void GetDiagonalMoves(GridProperties gridProperties, int[,] customDirectionLogic = null, int maxMoves = -1, bool checkForOpponents = false)
         {
@@ -114,47 +176,26 @@ namespace Chess
             for (int i = 0; i < (diagonalDirectionLogic.Length / 2); i++)
             {
                 int j = 1;
-                int xMove = currentX + (j * diagonalDirectionLogic[i, 0]);
-                int yMove = currentY + (j * diagonalDirectionLogic[i, 1]);
+                int x = currentX + (j * diagonalDirectionLogic[i, 0]);
+                int y = currentY + (j * diagonalDirectionLogic[i, 1]);
 
-                while (xMove <= 7  && xMove >= 0 && yMove <= 7 && yMove >= 0 && (maxMoves != -1 ? j <= maxMoves : true ))
+                while (x <= 7  && x >= 0 && y <= 7 && y >= 0 && (maxMoves != -1 ? j <= maxMoves : true ))
                 {
                     if(checkForOpponents)
                     {
-                        if((GetColorById(gridProperties.GridIdentifier) == 1 && GetColorById(grid[xMove, yMove]) != 2) ||
-                            (GetColorById(gridProperties.GridIdentifier) == 2 && GetColorById(grid[xMove, yMove]) != 1) || GetColorById(gridProperties.GridIdentifier) == 0)
+                        if((GetColorById(gridProperties.GridIdentifier) == 1 && GetColorById(grid[x, y]) != 2) ||
+                            (GetColorById(gridProperties.GridIdentifier) == 2 && GetColorById(grid[x, y]) != 1) )
                         {
                             break;
                         }
                     }
-                    if (hasChoosenPiece) 
+                    bool stop = SetPiecePath(gridProperties, x, y);
+                    if (stop)
                     {
-                        if(xMove == gridProperties.GridCoords.X && yMove == gridProperties.GridCoords.Y)
-                        {
-                            grid[gridProperties.GridCoords.X, gridProperties.GridCoords.Y] = choosenPieceProperties.GridIdentifier;
-                            grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = 0;
-                            ResetBoard();
-                            break;
-                        }
+                        break;
                     }
-                    else
-                    {
-                        if (grid[xMove, yMove] == 0)
-                        {
-                            grid[xMove, yMove] = -100;
-                        }
-                        else if (grid[xMove, yMove] > 0)
-                        {
-                            if ((GetColorById(gridProperties.GridIdentifier) == 1 && GetColorById(grid[xMove, yMove]) != 1)
-                                || (GetColorById(gridProperties.GridIdentifier) == 2 && GetColorById(grid[xMove, yMove]) != 2))
-                            {
-                                grid[xMove, yMove] *= -1;
-                            }
-                            break;
-                        }
-                    }
-                    xMove = currentX + (j * diagonalDirectionLogic[i, 0]);
-                    yMove = currentY + (j * diagonalDirectionLogic[i, 1]);
+                    x = currentX + (j * diagonalDirectionLogic[i, 0]);
+                    y = currentY + (j * diagonalDirectionLogic[i, 1]);
                     j++;
                 }
             }
@@ -165,7 +206,6 @@ namespace Chess
             int[] _upOrDown = upOrDown == null ? new int[2] { 1, 1 } : upOrDown;
             int x = hasChoosenPiece ? choosenPieceProperties.GridCoords.X : gridProperties.GridCoords.X;
             int y = hasChoosenPiece ? choosenPieceProperties.GridCoords.Y : gridProperties.GridCoords.Y;
-            int color = GetColorById(hasChoosenPiece ? choosenPieceProperties.GridIdentifier : gridProperties.GridIdentifier);
 
             for (int j = 0; j < 2; j++)
             {
@@ -173,29 +213,13 @@ namespace Chess
                 
                 while (y + i < 8 && y + i >= 0)
                 {
-                    if (hasChoosenPiece)
+                    bool stop = SetPiecePath(gridProperties, x, y+i);
+                    if (stop)
                     {
-
+                        break;
                     }
-                    else
-                    {
-                        if (grid[x, y + i] == 0)
-                        {
-                            grid[x, y + i] = -100;
-                        }
-                        else if (color != GetColorById(grid[x, y + i]))
-                        {
-                            grid[x, y + i] *= -1;
-                            break;
-
-                        }
-                        else if (color == GetColorById(grid[x, y + i]))
-                        {
-                            break;
-                        }
-                    }
-                    if(j == 1) { i++; } else { i--; }
                 }
+                if(j == 1) { i++; } else { i--; }
             }
         }
 
@@ -205,7 +229,6 @@ namespace Chess
             int[] _upOrDown = upOrDown == null ? new int[2] { 1, 1 } : upOrDown;
             int x = hasChoosenPiece ? choosenPieceProperties.GridCoords.X : gridProperties.GridCoords.X;
             int y = hasChoosenPiece ? choosenPieceProperties.GridCoords.Y : gridProperties.GridCoords.Y;
-            int color = GetColorById(hasChoosenPiece ? choosenPieceProperties.GridIdentifier : gridProperties.GridIdentifier);
   
             for (int j = 0; j < _upOrDown.Length; j++)
             {
@@ -217,53 +240,15 @@ namespace Chess
 
                     while (x + i < 8 && x + i >= 0 && (hasChoosenPiece ? choosenPieceProperties.GridCoords.Y == gridProperties.GridCoords.Y : true) && (maxMoves != -1 ? counter <= maxMoves : true))
                     {
-                        if (hasChoosenPiece)
+                        bool stop = SetPiecePath(gridProperties, x+i, y);
+                        if (stop)
                         {
-                            if (gridProperties.GridCoords.X == x + i)
-                            {
-                                //Debug.WriteLine("lel");
-                                grid[gridProperties.GridCoords.X, gridProperties.GridCoords.Y] = choosenPieceProperties.GridIdentifier;
-                                grid[choosenPieceProperties.GridCoords.X, choosenPieceProperties.GridCoords.Y] = 0;
-                                ResetBoard();
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (grid[x + i, y] == 0)
-                            {
-                                grid[x + i, y] = -100;
-                            }
-                            else if (color != GetColorById(grid[x + i, y]) && gridProperties.GridIdentifier != 1 && gridProperties.GridIdentifier != 7)
-                            {
-                                grid[x + i, y] *= -1;
-                                break;
-                            }
-                            else if (color == GetColorById(grid[x + i, y]))
-                            {
-                                break;
-                            }
+                            break;
                         }
                         if (j == 0) { i++; } else { i--; }
                         counter++;
-
                     }
                 }
-            }
-        }
-
-
-        private void SwitchChoosenPiece(GridProperties gridProperties)
-        {
-            if (hasChoosenPiece)
-            {
-                hasChoosenPiece = false;
-            }
-            else
-            {
-                hasChoosenPiece = true;
-                choosenPieceProperties = gridProperties;
-
             }
         }
 
@@ -271,7 +256,7 @@ namespace Chess
         {
             int color = GetColorById(gridProperty.GridIdentifier);
             int[] verticalGrid = null;
-            int[,] customDiagonalDir = null; 
+            int[,] customDiagonalDir = null;
 
             if (color == 2) { verticalGrid = new int[2] { 1, 0 }; customDiagonalDir = new int[2, 2] { { 1, 1 }, { 1, -1 } };  } 
             else if(color == 1) { verticalGrid = new int[2] { 0, 1 }; customDiagonalDir = new int[2, 2] { { -1, -1 }, { -1, 1 } }; }

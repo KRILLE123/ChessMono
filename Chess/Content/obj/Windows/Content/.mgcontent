@@ -4,19 +4,19 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/1.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/10.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/11.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/12.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/2.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/3.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/4.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/5.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/6.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/7.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/8.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/9.png</File>
-    <File>C:/Users/INF2/Documents/GitHub/Chess2/Chess/Content/line.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/1.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/10.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/11.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/12.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/2.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/3.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/4.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/5.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/6.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/7.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/8.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/9.png</File>
+    <File>A:/Downloads/Chess-main/Chess/Chess/Chess/Content/line.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
