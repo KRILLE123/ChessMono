@@ -1,2 +1,1 @@
 # ChessMono
-just chess.
